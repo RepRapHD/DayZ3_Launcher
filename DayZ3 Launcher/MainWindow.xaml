@@ -20,7 +20,9 @@
                 <Label Content="Recent News" HorizontalAlignment="Left" Margin="134,139,0,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid x:Name="ServerList" Margin="0,0,0,0" Visibility="Visible">
+                
                 <ToolBar x:Name="ServerList_Toolbar" VerticalAlignment="Top" Height="30">
+                    <Button x:Name="ServerList_Refresh" Content="Button" Height="25" VerticalAlignment="Top" Width="75" MouseDown="ServerList_Refresh_MouseDown"/>
                     <Label Content="GameType:" Height="25" VerticalAlignment="Bottom"/>
                     <ComboBox x:Name="ServerList_GameType" Height="25" Margin="0" VerticalAlignment="Top" Width="138">
                         <ComboBoxItem x:Name="DayZ" Content="Zoombies Mod" IsSelected="True"/>
@@ -31,7 +33,7 @@
                     <CheckBox x:Name="ServerList_Locked" Content="Hide Locked" Height="25" VerticalAlignment="Top" Width="75" IsChecked="True"/>
                     <CheckBox x:Name="ServerList_Version" Content="Hide Wrong Version" Height="25" VerticalAlignment="Top" Width="120" IsChecked="True"/>
                 </ToolBar>
-                <ListView Margin="0,30,0,0" ItemsSource="{Binding serverListItems}">
+                <ListView x:Name="serverListView" Margin="0,30,0,0" ItemsSource="{Binding}" MouseUp="serverListView_Click">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn x:Name="ServerView_Favorite" Width="20" DisplayMemberBinding="{Binding Favorite}"/>

@@ -19,15 +19,19 @@ namespace DayZ3_Launcher
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public serverList ServerListMW;
+
         public MainWindow()
         {
             InitializeComponent();
             this.HideAll();
             RecentNews.Visibility = System.Windows.Visibility.Visible;
 
-            //serverListItems list = new serverListItems();
-            //serverListItem item1 = new serverListItem(true, "1", "2", "3", "4", "5");
-            //list.Add(item1);
+            //serverListItems list = new serverListCreator();
+            ServerListMW = new serverList();
+            serverListView.DataContext = ServerListMW.serverListItems;
+
         }
 
         /*
@@ -80,6 +84,17 @@ namespace DayZ3_Launcher
         {
             this.HideAll();
             Settings.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void serverListView_Click(object sender, MouseButtonEventArgs e)
+        {
+            var firstSelectedItem = (serverListItem)serverListView.SelectedItems[0];
+            MessageBox.Show("Type is:" + firstSelectedItem.ServerName);
+        }
+
+        private void ServerList_Refresh_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            serverListCreator list = new serverListCreator(this);
         }
     }
 }

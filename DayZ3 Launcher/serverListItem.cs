@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace DayZ3_Launcher
 {
-    class serverListItem
+    public class serverListItem
     {
         
         public string ServerName { get; set; }
@@ -23,6 +23,12 @@ namespace DayZ3_Launcher
         public string Players { get; set; }
         public string Ping { get; set; }
         public string GameType { get; set; }
+        public string Country { get; set; }
+        public string IP { get; set; }
+        public string Port { get; set; }
+        public string Island { get; set; }
+        public string Mods { get; set; }
+        public string Locked { get; set; }
 
         public CheckBox Favorite { get; set; }
 
@@ -32,7 +38,7 @@ namespace DayZ3_Launcher
         }
     }
 
-    class serverList : ObservableCollection<serverListItem>
+    public class serverList : ObservableCollection<serverListItem>
     {
         ObservableCollection<serverListItem> _serverListItems = new ObservableCollection<serverListItem>();
 
@@ -40,12 +46,17 @@ namespace DayZ3_Launcher
         {
             get { return this._serverListItems; }
             set { this._serverListItems = value; }
+
+        }
+        public void Add(serverListItem item){
+            this._serverListItems.Add(item);
         }
 
         public serverList()
             : base()
         {
-            serverListItems.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
+            //serverListItems.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
+            //serverListItems.Add(
         }
     }
 
