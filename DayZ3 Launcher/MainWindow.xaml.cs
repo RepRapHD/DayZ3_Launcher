@@ -98,8 +98,14 @@ namespace DayZ3_Launcher
          */
         private void serverListView_Click(object sender, MouseButtonEventArgs e)
         {
-            //var firstSelectedItem = (serverListItem)serverListView.SelectedItems[0];
+            var _selectedItem = (serverListItem)serverListView.SelectedItems[0];
            // MessageBox.Show("Type is:" + firstSelectedItem.ServerName);
+            var _gameIP = _selectedItem.IP;
+            var _gamePort = _selectedItem.Port;
+            string _gamePath = Settings.Arma3Path + @"\arma3.exe";
+            string _args = "-connect=" + _gameIP + " -port=" + _gamePort + Settings.Arma3_Options+ " " + @"-mod=""@DayZA3_Chernarus;@CBA_A3;@AllInArma\ProductDummies;C:\Program Files (x86)\Steam\steamapps\common\Take On Helicopter;" + Settings.Arma2Path + ";" + Settings.Arma2OAPath + ";" + Settings.Arma2OAPath + @"\Expansion" + ";" + Settings.Arma3Path + ";" + @"@AllInArma\Core;@AllInArma\PostA3""";
+            Console.WriteLine("GAME PATH:" + _gamePath);
+            System.Diagnostics.Process.Start(_gamePath, _args);
         }
 
         /*

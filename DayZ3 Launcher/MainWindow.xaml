@@ -28,9 +28,9 @@
                             <Image Source="Assets/Refresh.png" />
                         </Grid>
                     </Button>
-                    <Label Content="GameType:" Height="25" VerticalAlignment="Bottom"/>
                     <ComboBox x:Name="ServerList_GameType" Height="25" Margin="0" VerticalAlignment="Top" Width="138">
-                        <ComboBoxItem x:Name="DayZ" Content="Zoombies Mod" IsSelected="True"/>
+                        <ComboBoxItem Content="All Servers" IsSelected="True"/>
+                        <ComboBoxItem x:Name="DayZ" Content="Zoombies Mod"/>
                         <ComboBoxItem x:Name="Dead_Nation" Content="Dead Nation"/>
                     </ComboBox>
                     <CheckBox x:Name="ServerList_Empty" Content="Not Empty" Height="25" VerticalAlignment="Top" Width="70" IsChecked="True"/>
@@ -38,10 +38,10 @@
                     <CheckBox x:Name="ServerList_Locked" Content="Hide Locked" Height="25" VerticalAlignment="Top" Width="75" IsChecked="True"/>
                     <CheckBox x:Name="ServerList_Version" Content="Hide Wrong Version" Height="25" VerticalAlignment="Top" Width="120" IsChecked="True"/>
                 </ToolBar>
-                <ListView x:Name="serverListView" Margin="0,30,0,0" ItemsSource="{Binding}" MouseUp="serverListView_Click" HorizontalContentAlignment="Center" >
+                <ListView x:Name="serverListView" Margin="0,30,0,0" ItemsSource="{Binding}" HorizontalContentAlignment="Center" MouseDoubleClick="serverListView_Click" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn x:Name="ServerView_Favorite" Width="20" DisplayMemberBinding="{Binding Favorite}"/>
+                            <GridViewColumn x:Name="ServerView_Favorite" Width="20" DisplayMemberBinding="{Binding Favorite}" />
                             <GridViewColumn x:Name="ServerView_ServerName" Header="Server Name" Width="250" DisplayMemberBinding="{Binding ServerName}"/>
                             <GridViewColumn x:Name="ServerView_Version" Header="Version" Width="50" DisplayMemberBinding="{Binding Version}"/>
                             <GridViewColumn x:Name="ServerView_Players" Header="Players" Width="50" DisplayMemberBinding="{Binding Players}"/>

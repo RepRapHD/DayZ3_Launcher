@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Settings>
-  <Arma2Path>Blah</Arma2Path>
-  <Arma2OAPath>Test</Arma2OAPath>
-  <Arma3Path></Arma3Path>
+  <Arma2Path>C:\Program Files (x86)\Steam\SteamApps\common\Arma 2</Arma2Path>
+  <Arma2OAPath>C:\Program Files (x86)\Steam\SteamApps\common\Arma 2 Operation Arrowhead</Arma2OAPath>
+  <Arma3Path>C:\Program Files (x86)\Steam\SteamApps\common\Arma 3</Arma3Path>
   <Arma2_Options></Arma2_Options>
   <Arma3_Options></Arma3_Options>
   <Windowed></Windowed>
