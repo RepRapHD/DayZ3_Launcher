@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Web;
 using System.Net;
 using System.Xml;
+using System.Xml.Linq;
 
 //using DayZ3_Launcher.serverListItem;
 
@@ -17,27 +18,43 @@ namespace DayZ3_Launcher
     class serverListCreator
     {
         /* http://arma3.swec.se/server/list.xml?country=&mquery=DayZ&nquery=&state_playing=1 */
+        MainWindow window;
 
         public serverListCreator (MainWindow window){
-            WebClient client = new WebClient();
-            Stream data = client.OpenRead("http://arma3.swec.se/server/list.xml?country=&mquery=DayZ&nquery=&state_playing=1");
-            StreamReader reader = new StreamReader(data);
-            string xml = reader.ReadToEnd();
+            this.window = window;
 
-            data.Close();
-            reader.Close();
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(xml);
+            // Creates the XML Server List Path
+            ComboBoxItem _gameType = (ComboBoxItem)window.ServerList_GameType.SelectedValue; //.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
+            string Path = "http://arma3.swec.se/server/list.xml?country=&mquery=" + _gameType.Name.ToString().Replace("_", " ") +"&nquery=&state_playing=1";
+            Console.WriteLine("Mission Path: " + Path);
+            
+            XDocument xdoc = XDocument.Load(Path);
 
-            XmlNode node = xmlDoc.SelectSingleNode("//servers/server/country/text()");
-            MessageBox.Show("STRING:" +node.Value);
-            
-            
-            window.ServerListMW.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
-            //window.ServerListMW.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
-            //window.ServerListMW.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
-            //window.ServerListMW.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
-            
+            foreach (var server in xdoc.Descendants("server"))
+            {
+                try
+                {
+                    this.window.ServerListMW.AddItem(new serverListItem
+                    {
+                        Favorite = new CheckBox(),
+                        ServerName = server.Element("name").Value,
+                        Version = server.Element("version").Value,
+                        Players = server.Element("players").Value,
+                        Ping = "000",
+                        GameType = server.Element("mission").Value,
+                        Country = server.Element("country").Value,
+                        IP = server.Element("host").Value,
+                        Port = server.Element("port").Value,
+                        Mods = server.Element("mod").Value,
+                        Locked = server.Element("passworded").Value,
+                        Mission = server.Element("mission").Value,
+                    });
+                }
+                catch (NullReferenceException except)
+                {
+                    Console.WriteLine("Error Exception: {0}", except);
+                }
+            }
         }
     }
 }

@@ -1,0 +1,5 @@
+﻿dayz_logo.png:
+Licensed to Bohemian Interactive
+
+Refresh.png:
+Licensed for free use @ http://www.veryicon.com/icons/system/must-have/refresh-8.html

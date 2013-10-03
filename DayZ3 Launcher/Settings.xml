@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <Arma2Path>Blah</Arma2Path>
+  <Arma2OAPath>Test</Arma2OAPath>
+  <Arma3Path></Arma3Path>
+  <Arma2_Options></Arma2_Options>
+  <Arma3_Options></Arma3_Options>
+  <Windowed></Windowed>
+  <Direct3D9></Direct3D9>
+</Settings>

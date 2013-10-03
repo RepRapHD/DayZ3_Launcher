@@ -21,14 +21,20 @@ namespace DayZ3_Launcher
     {
 
         public serverList ServerListMW;
+        SettingsManager Settings;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Hide All &
+            // Make Recent News The Default Slide
             this.HideAll();
             RecentNews.Visibility = System.Windows.Visibility.Visible;
 
-            //serverListItems list = new serverListCreator();
+            // Connect the Settings Manager
+            this.Settings = new SettingsManager(this);
+
             ServerListMW = new serverList();
             serverListView.DataContext = ServerListMW.serverListItems;
 
@@ -43,7 +49,7 @@ namespace DayZ3_Launcher
             RecentNews.Visibility = System.Windows.Visibility.Hidden;
             ServerList.Visibility = System.Windows.Visibility.Hidden;
             Installer.Visibility = System.Windows.Visibility.Hidden;
-            Settings.Visibility = System.Windows.Visibility.Hidden;
+            SettingsSlide.Visibility = System.Windows.Visibility.Hidden;
         }
 
         /*
@@ -83,18 +89,76 @@ namespace DayZ3_Launcher
         private void Settings_Btn_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.HideAll();
-            Settings.Visibility = System.Windows.Visibility.Visible;
+            SettingsSlide.Visibility = System.Windows.Visibility.Visible;
         }
 
+        /*
+         * function serverListView_Click
+         * This connects the user to a server.
+         */
         private void serverListView_Click(object sender, MouseButtonEventArgs e)
         {
-            var firstSelectedItem = (serverListItem)serverListView.SelectedItems[0];
-            MessageBox.Show("Type is:" + firstSelectedItem.ServerName);
+            //var firstSelectedItem = (serverListItem)serverListView.SelectedItems[0];
+           // MessageBox.Show("Type is:" + firstSelectedItem.ServerName);
         }
 
-        private void ServerList_Refresh_MouseDown(object sender, MouseButtonEventArgs e)
+        /*
+         * function ServerList_Refresh_MouseUp
+         * This clears the items list, then generates a new list from XML data.
+         */
+        private void ServerList_Refresh_MouseUp(object sender, RoutedEventArgs e)
         {
+            ServerListMW.Clear();
             serverListCreator list = new serverListCreator(this);
+        }
+
+
+        /*
+         * function Arma2Path_Btn_Click
+         * This sets the Arma2 Paths.
+         */
+        private void Arma2Path_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
+            dlg.ShowNewFolderButton = true; //if you want new folders as well
+            dlg.SelectedPath = @"C:\Program Files (x86)\Steam\SteamApps\common\Arma 2"; //where to start
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //ok user selected something
+                Arma2Path_Box.Text = dlg.SelectedPath;
+            }
+        }
+
+        /*
+         * function Arma2OAPath_Btn_Click
+         * This sets the Arma2 Operation Arrowhead Paths.
+         */
+        private void Arma2OAPath_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
+            dlg.ShowNewFolderButton = true; //if you want new folders as well
+            dlg.SelectedPath = @"C:\Program Files (x86)\Steam\SteamApps\common\Arma 2 Operation Arrowhead"; //where to start
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //ok user selected something
+                Arma2OAPath_Box.Text = dlg.SelectedPath;
+            }
+        }
+
+        /*
+         * function Arma3Path_Btn_Click
+         * This sets the Arma3 Paths.
+         */
+        private void Arma3Path_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
+            dlg.ShowNewFolderButton = true; //if you want new folders as well
+            dlg.SelectedPath = @"C:\Program Files (x86)\Steam\SteamApps\common\Arma 3"; //where to start
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //ok user selected something
+                Arma3Path_Box.Text = dlg.SelectedPath;
+            }
         }
     }
 }

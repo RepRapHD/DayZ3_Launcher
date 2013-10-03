@@ -29,13 +29,10 @@ namespace DayZ3_Launcher
         public string Island { get; set; }
         public string Mods { get; set; }
         public string Locked { get; set; }
+        public string Mission { get; set; }
 
         public CheckBox Favorite { get; set; }
 
-        public serverListItem()
-        {
-
-        }
     }
 
     public class serverList : ObservableCollection<serverListItem>
@@ -46,17 +43,32 @@ namespace DayZ3_Launcher
         {
             get { return this._serverListItems; }
             set { this._serverListItems = value; }
+        }
 
+        /*
+         * function AddItem
+         * Public function used to add servers to the list.
+         */
+        public void AddItem(serverListItem item){
+            serverListItems.Add(item);
         }
-        public void Add(serverListItem item){
-            this._serverListItems.Add(item);
+
+        /*
+         * function Clear
+         * We're overwriting the native function of clear.
+         * We do this so we can clear the internal ListItems
+         */
+        public void Clear()
+        {
+            this.ClearItems();
+            _serverListItems.Clear();
         }
+
 
         public serverList()
             : base()
         {
-            //serverListItems.Add(new serverListItem { Favorite = new CheckBox(), ServerName = "1", Version = "2", Players = "3", Ping = "4", GameType = "5" });
-            //serverListItems.Add(
+            
         }
     }
 

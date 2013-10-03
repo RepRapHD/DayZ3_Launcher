@@ -14,15 +14,20 @@
             <Label x:Name="ServerList_Btn" Content="Server List" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="18" MouseDown="ServerList_Btn_MouseDown"/>
             <Label x:Name="Installer_Btn" Content="Install / Update" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="18" MouseDown="Installer_Btn_MouseDown"/>
             <Label x:Name="Settings_Btn" Content="Settings" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="18" MouseDown="Settings_Btn_MouseDown"/>
+            <Image HorizontalAlignment="Left" Height="83" Margin="10,30,0,0" VerticalAlignment="Top" Width="180" Source="Assets/dayz_logo.png"/>
         </Grid>
         <Grid x:Name="ContentGrid" Margin="200,0,0,0">
-            <Grid x:Name="RecentNews" Margin="0,0,0,0" Visibility="Hidden">
-                <Label Content="Recent News" HorizontalAlignment="Left" Margin="134,139,0,0" VerticalAlignment="Top"/>
+            <Grid x:Name="RecentNews" Margin="0,0,0,0" Visibility="Visible">
+                <WebBrowser Source="http://www.reddit.com/r/dayz/.compact"/>
             </Grid>
             <Grid x:Name="ServerList" Margin="0,0,0,0" Visibility="Visible">
                 
                 <ToolBar x:Name="ServerList_Toolbar" VerticalAlignment="Top" Height="30">
-                    <Button x:Name="ServerList_Refresh" Content="Button" Height="25" VerticalAlignment="Top" Width="75" MouseDown="ServerList_Refresh_MouseDown"/>
+                    <Button x:Name="ServerList_Refresh" Height="25" VerticalAlignment="Top" Width="28" MouseUp="ServerList_Refresh_MouseUp" Click="ServerList_Refresh_MouseUp">
+                        <Grid HorizontalAlignment="Center">
+                            <Image Source="Assets/Refresh.png" />
+                        </Grid>
+                    </Button>
                     <Label Content="GameType:" Height="25" VerticalAlignment="Bottom"/>
                     <ComboBox x:Name="ServerList_GameType" Height="25" Margin="0" VerticalAlignment="Top" Width="138">
                         <ComboBoxItem x:Name="DayZ" Content="Zoombies Mod" IsSelected="True"/>
@@ -33,7 +38,7 @@
                     <CheckBox x:Name="ServerList_Locked" Content="Hide Locked" Height="25" VerticalAlignment="Top" Width="75" IsChecked="True"/>
                     <CheckBox x:Name="ServerList_Version" Content="Hide Wrong Version" Height="25" VerticalAlignment="Top" Width="120" IsChecked="True"/>
                 </ToolBar>
-                <ListView x:Name="serverListView" Margin="0,30,0,0" ItemsSource="{Binding}" MouseUp="serverListView_Click">
+                <ListView x:Name="serverListView" Margin="0,30,0,0" ItemsSource="{Binding}" MouseUp="serverListView_Click" HorizontalContentAlignment="Center" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn x:Name="ServerView_Favorite" Width="20" DisplayMemberBinding="{Binding Favorite}"/>
@@ -51,8 +56,25 @@
             <Grid x:Name="Installer" Margin="0,0,0,0" Visibility="Hidden">
                 <Label Content="Label" HorizontalAlignment="Left" Margin="193,234,0,0" VerticalAlignment="Top"/>
             </Grid>
-            <Grid x:Name="Settings" Margin="0,0,0,0" Visibility="Hidden">
-                <Label Content="Label" HorizontalAlignment="Left" Margin="193,234,0,0" VerticalAlignment="Top"/>
+            <Grid x:Name="SettingsSlide" Visibility="Hidden">
+                <Label Content="Arma 2 Path:" HorizontalAlignment="Left" Margin="13,26,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Arma2Path_Box" HorizontalAlignment="Left" Height="23" Margin="19,52,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="377"/>
+                <Button x:Name="Arma2Path_Btn" Content="Select" HorizontalAlignment="Left" Margin="401,55,0,0" VerticalAlignment="Top" Width="75" Click="Arma2Path_Btn_Click"/>
+                <Label Content="Arma 2 Operation Arrowhead Path:" HorizontalAlignment="Left" Margin="14,86,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Arma2OAPath_Box" HorizontalAlignment="Left" Height="23" Margin="19,112,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="377"/>
+                <Button x:Name="Arma2OAPath_Btn" Content="Select" HorizontalAlignment="Left" Margin="401,112,0,0" VerticalAlignment="Top" Width="75" Click="Arma2OAPath_Btn_Click"/>
+                <Label Content="Arma 3 Path:" HorizontalAlignment="Left" Margin="14,146,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Arma3Path_Box" HorizontalAlignment="Left" Height="23" Margin="19,172,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="377"/>
+                <Button x:Name="Arma3Path_Btn" Content="Select" HorizontalAlignment="Left" Margin="401,172,0,0" VerticalAlignment="Top" Width="75" Click="Arma3Path_Btn_Click"/>
+                <Label Content="GAME PATHS" HorizontalAlignment="Left" Margin="14,2,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="GAME OPTIONS" HorizontalAlignment="Left" Margin="14,212,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <CheckBox x:Name="Setting_Windowed" Content="Start Windowed" HorizontalAlignment="Left" Margin="19,243,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="Setting_ForceD3D" Content="Force Direct3D 9" HorizontalAlignment="Left" Margin="19,263,0,0" VerticalAlignment="Top"/>
+                <Label Content="LAUNCH OPTIONS" HorizontalAlignment="Left" Margin="14,292,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Content="Arma 2 Launch Options:" HorizontalAlignment="Left" Margin="14,316,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Settings_Arma2Options" HorizontalAlignment="Left" Height="23" Margin="19,342,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="377"/>
+                <Label Content="Arma 3 Launch Options:" HorizontalAlignment="Left" Margin="14,376,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Settings_Arma3Options" HorizontalAlignment="Left" Height="23" Margin="19,402,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="377"/>
             </Grid>
         </Grid>
     </Grid>
